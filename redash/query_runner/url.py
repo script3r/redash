@@ -13,7 +13,7 @@ class Url(BaseQueryRunner):
                     'title': 'URL base path'
                 },
                 'verify_tls': {
-                    'type': TYPE_BOOLEAN,
+                    'type': 'boolean',
                     'title': 'Verify TLS',
                 }
             }
@@ -42,7 +42,7 @@ class Url(BaseQueryRunner):
 
             url = base_url + query
 
-            response = requests.get(url, verify=self.configuration.get('verify_tls', True))
+            response = requests.get(url, verify=self.configuration.get('verify_tls', False))
             response.raise_for_status()
             json_data = response.content.strip()
 

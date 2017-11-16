@@ -146,18 +146,18 @@ class JiraJQL(BaseQueryRunner):
             'type': 'object',
             'properties': {
                 'url': {
-                    'type': TYPE_STRING,
+                    'type': 'string'',
                     'title': 'JIRA URL'
                 },
                 'username': {
-                    'type': TYPE_STRING,
+                    'type': 'string',
                 },
                 'password': {
-                    'type': TYPE_STRING
+                    'type': 'string'
                 },
                 'verify_tls': {
                     'title': 'Verify TLS',
-                    'type': TYPE_BOOLEAN,
+                    'type': 'boolean',
                 }
             },
             'required': ['url', 'username', 'password'],
@@ -190,7 +190,7 @@ class JiraJQL(BaseQueryRunner):
             else:
                 query['maxResults'] = query.get('maxResults', 1000)
 
-            response = requests.get(jql_url, params=query, verify=self.configuration.get('verify_tls', True), auth=(self.configuration.get('username'), self.configuration.get('password')))
+            response = requests.get(jql_url, params=query, verify=self.configuration.get('verify_tls', False), auth=(self.configuration.get('username'), self.configuration.get('password')))
 
             if response.status_code == 401 or response.status_code == 403:
                 return None, "Authentication error. Please check username/password."
